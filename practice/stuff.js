@@ -1,15 +1,15 @@
-var arrLength = function(arr){
-    return `Array Length = ${arr.length}`;
+var arrayLength = (arr) => {
+    return `array length = ${arr.length}`;
 };
 
-var adder = function(a, b){
-    return `Sum = ${a+b}`;
+var adder = function(a,b){
+    return `sum = ${a+b}`;
 };
 
 var pi = 3.14;
 
 module.exports = {
-    arrLength : arrLength,
-    adder: adder,
+    arrayLength: arrayLength,
+    adder : adder,
     pi : pi,
 };
