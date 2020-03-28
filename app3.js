@@ -1,28 +1,36 @@
 // ! HTTP - Requests and Responses
 // ! Pipes and Streams - Readable and Writable
 
-// TODO: Create a server that pipes readable data into a response.
-// A request consists of request + request header.
-// A response consists of response data + response header.
-var http = require('http');
+// TODO: Create a server that reads hello world into a brower.
 var fs = require('fs');
-/*
-var server = http.createServer(function(req, res){
-    console.log('Request was made: '+req.url); // displays message in console when a request is made.
-    res.writeHead(200, {'Content-Type': 'text/plain'}); // Status: 200, Content: plain text
+var http = require('http');
 
-    var myReadStream = fs.createReadStream(__dirname + '/readstream.txt', 'utf8');
-    myReadStream.pipe(res);
-});
-server.listen(3000, '127.0.0.1'); // port:3000, localhost
+var server = http.createServer((req, res) => (
+    console.log('Requesting URL: ' + req.url),
+    res.writeHead(200, {'Content-Type': 'text/plain'}),
+    res.end('Hello World!')
+));
+server.listen(3000, '127.0.0.1');
+console.log('Listening to port: 3000...');
+
+// TODO: Create a server that pipes readable data into a browser.
+/*
+var readStream = fs.createReadStream(__dirname + '/readme.txt', 'utf8');
+var server = http.createServer((req, res) => (
+    console.log('Requesting URL: ' + req.url),
+    res.writeHead(200, {'Content-Type': 'text/plain'}),
+    readStream.pipe(res)
+));
+server.listen(3000, '127.0.0.1');
 console.log('Listening to port: 3000...');
 */
 // TODO: Read a file into new file using streams.
 // Read the data chunks and write the chunks into the new file.
-var myReadStream = fs.createReadStream(__dirname + '/readstream.txt', 'utf8');
-var myWriteStream = fs.createWriteStream(__dirname + '/writestream.txt');
-myReadStream.on('data', (chunk) => (
-    console.log('New chunk received'),
-    myWriteStream.write(chunk)
+/*
+var readStream = fs.createReadStream(__dirname + '/readme.txt', 'utf8');
+var writeStream = fs.createWriteStream(__dirname + '/writeme.txt');
+readStream.on('data', (chunk) => (
+    console.log('New chunk received.'),
+    writeStream.write(chunk)
 ));
-
+*/

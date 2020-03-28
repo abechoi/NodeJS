@@ -1,10 +1,10 @@
-var arrayLength = (arr) => {
-    return `array length = ${arr.length}`;
-};
+var arrayLength = (arr) => (
+    `array length = ${arr.length}`
+);
 
-var adder = function(a,b){
-    return `sum = ${a+b}`;
-};
+var adder = (a,b) => (
+    `sum = ${a+b}`
+);
 
 var pi = 3.14;
 

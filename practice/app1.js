@@ -7,14 +7,14 @@ console.log(stuff.pi);
 console.log(stuff.arrayLength([1,2,3]));
 
 // TODO: Utilize the set timeout function.
-//setTimeout(() => (console.log('3 seconds have passed.'), 3000));
+//setTimeout(() => (console.log('2 seconds have passed.')), 2000);
 
 // TODO: Utilize the set interval function.
 var time = 0;
 var timerID = setInterval(() => (
     time += 2,
     console.log(`${time} seconds have passed.`),
-    time > 5 && clearInterval(timerID)
+    time > 3 && clearInterval(timerID)
 ), 2000);
 
 // TODO: Event Handling...
@@ -25,19 +25,21 @@ var timerID = setInterval(() => (
 // each of them emit a message.
 var util = require('util');
 var events = require('events');
-var Person = function(name){
+
+function Person(name){
     this.name = name
 };
+
+util.inherits(Person, events.EventEmitter);
 var choi = new Person('choi');
 var jong = new Person('jong');
 var hae = new Person('hae');
-util.inherits(Person, events.EventEmitter);
 var people = [choi,jong,hae];
 people.forEach((person) => (
     person.on('speak', (msg) => (
         console.log(`${person.name}: ${msg}`)
     ))
 ));
-choi.emit('speak', "Hello everyone.");
-jong.emit('speak', "I'm hungry.");
+choi.emit('speak', "Hello everyone");
+jong.emit('speak', "I'm hungry");
 hae.emit('speak', "I'm eating yogurt.");
