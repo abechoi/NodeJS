@@ -1,1 +1,1 @@
-Hello world, my name is Abe!
+My name is Abe Choi and my Korean name is Choi Jong-Hae.
