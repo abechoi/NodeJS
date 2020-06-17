@@ -1,0 +1,5 @@
+Update Nodejs
+
+1. sudo npm cache clean -f
+2. sudo npm install -g n
+3. sudo n stable  
