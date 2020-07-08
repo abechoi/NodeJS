@@ -8,7 +8,7 @@ const Blog = require('./models/blog');
 // mongodb+srv://[USERNAME]:[PASSWORD]@cluster0.eoe0p.mongodb.net/[DATABASE]?retryWrites=true&w=majority
 const dbURI = 'mongodb+srv://[USERNAME]:[PASSWORD]@cluster0.eoe0p.mongodb.net/[DATABASE]?retryWrites=true&w=majority';
 moongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
-.then((result) => {
+.then(() => {
 
     console.log('connected to db'); 
     app.listen(3000);
