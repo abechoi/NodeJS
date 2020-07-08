@@ -104,6 +104,12 @@ app.post('/blogs', (req, res) => {
     });
 });
 
+// localhost:3000/blogs/create GET
+app.get('/blogs/create', (req, res) => {
+    res.render('create', { title: 'Create A New Blog'});
+});
+
+// localhost:3000/blogs/:id GET
 app.get('/blogs/:id', (req, res) => {
     const id = req.params.id;
     Blog.findById(id)
@@ -115,10 +121,20 @@ app.get('/blogs/:id', (req, res) => {
     });
 });
 
-// localhost:3000/blogs/create GET
-app.get('/blogs/create', (req, res) => {
-    res.render('create', { title: 'Create A New Blog'});
+// localhost:3000/blogs/:id DELETE
+app.delete('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+
+    Blog.findByIdAndDelete(id)
+    .then(result => {
+        res.json({ redirect: '/blogs' });
+    })
+    .catch(err => {
+        console.log(err);
+    });
 });
+
+
 
 // redirect
 /*
