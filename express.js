@@ -6,7 +6,7 @@ const Blog = require('./models/blog');
 // connect to mongodb
 // listen for requests
 // mongodb+srv://[USERNAME]:[PASSWORD]@cluster0.eoe0p.mongodb.net/[DATABASE]?retryWrites=true&w=majority
-const dbURI = 'mongodb+srv://[USERNAME]:[PASSWORD]@cluster0.eoe0p.mongodb.net/[DATABASE]?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://abechoi:iwbiny319@cluster0.eoe0p.mongodb.net/node-tuts?retryWrites=true&w=majority';
 moongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
 .then((result) => {
 
@@ -24,7 +24,7 @@ app.set('view engine', 'ejs');
 
 // middleware and static files via morgan
 app.use(express.static('public'));
-
+app.use(express.urlencoded({ extended: true })); // without this: POST /blogs undefined
 app.use(morgan('dev'));
 
 /*
@@ -45,6 +45,7 @@ app.get('/add-blog', (req, res) => {
     });
 });
 
+// Return All Blogs
 app.get('/all-blogs', (req, res) => {
     Blog.find()
     .then((result) => {
@@ -55,6 +56,7 @@ app.get('/all-blogs', (req, res) => {
     });
 });
 
+// Return Blog By ID
 app.get('/single-blog', (req, res) => {
     Blog.findById('5f0262f843ab1336c8a836ed')
     .then((result) => {
@@ -76,7 +78,9 @@ app.get('/about', (req, res) => {
     res.render('about', { title: 'About' })
 });
 
-// blog routes
+// BLOG ROUTES
+
+// localhost:3000/blogs GET
 app.get('/blogs', (req, res) => {
     Blog.find().sort({ createdAt: -1 })
     .then((result) => {
@@ -85,6 +89,35 @@ app.get('/blogs', (req, res) => {
     .catch((err) => {
         console.log(err);
     });
+});
+
+// localhost:3000/blogs POST
+app.post('/blogs', (req, res) => {
+    const blog = new Blog(req.body);
+
+    blog.save()
+    .then((result) => {
+        res.redirect('/blogs');
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+});
+
+app.get('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+    Blog.findById(id)
+    .then((result) => {
+        res.render('details', { blog: result, title: 'Blog Details' });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+});
+
+// localhost:3000/blogs/create GET
+app.get('/blogs/create', (req, res) => {
+    res.render('create', { title: 'Create A New Blog'});
 });
 
 // redirect
