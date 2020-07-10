@@ -6,7 +6,7 @@ const blogRoutes = require('./routes/blogRoutes');
 // connect to mongodb
 // listen for requests
 // mongodb+srv://[USERNAME]:[PASSWORD]@cluster0.eoe0p.mongodb.net/[DATABASE]?retryWrites=true&w=majority
-const dbURI = 'mongodb+srv://abechoi:iwbiny319@cluster0.eoe0p.mongodb.net/node-tuts?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://[USERNAME]:[PASSWORD]@cluster0.eoe0p.mongodb.net/[DATABASE]?retryWrites=true&w=majority';
 moongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
 
